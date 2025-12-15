@@ -55,13 +55,13 @@
     <!-- Application Structure Plan: 
          1. Executive Summary: High-level introduction to the Hybrid Model.
          2. Interactive Org Hierarchy: A visual tree representing the 3 tiers (Global, Regional, Site). Users click nodes to see specific responsibilities and KPIs in a detail panel. This now includes specific nodes for Americas and EMEA/Europe.
-         3. Competency Balance: A Radar chart comparing the skill requirements for Global vs. Local roles (Strategy vs. Execution).
+         3. Competency Balance: A Radar chart comparing the skill requirements for Global vs. Local roles (Strategy vs. Execution), now with explicit textual clarification about the 0-10 scale.
          4. Reporting Lines Simulator: A toggle section comparing Functional vs. Matrix reporting structures with pros/cons.
          5. RACI Matrix Explorer: Filterable list of key H&S tasks assigned to different levels, now with a mandatory legend for clarity.
          Rationale: This structure moves from the "What" (Hierarchy) to the "Who" (Skills) to the "How" (Reporting/Tasks), ending with "How Many" (Resourcing). -->
     <!-- Visualization & Content Choices:
          1. Org Chart: HTML/CSS Flex/Grid + JS. Goal: Organize. Justification: Best way to show hierarchy without SVG.
-         2. Competency Radar: Chart.js Radar. Goal: Compare. Justification: Effectively shows the shift in focus (Strategy vs Ops) across roles.
+         2. Competency Radar: Chart.js Radar. Goal: Compare. Justification: Effectively shows the shift in focus (Strategy vs Ops) across roles. Explicitly clarifies the 0-10 scale represents relative priority/competency, defining 0 and 10.
          3. Reporting Toggle: JS/HTML Switch. Goal: Inform/Change. Justification: Allows user to see the impact of reporting lines interactively.
          4. RACI Table: JS Filter + Dedicated Legend. Goal: Organize. Justification: Standard tool for roles & responsibilities, now clarified with an explicit key for R, A, C, I.
     -->
@@ -246,7 +246,11 @@
                         <div class="chart-container">
                             <canvas id="competencyChart"></canvas>
                         </div>
-                        <p class="text-xs text-slate-400 mt-2 text-center">Chart displays relative focus areas (Scale 0-10)</p>
+                        <p class="text-xs text-slate-500 mt-2 text-center max-w-sm">
+                            <span class="font-semibold text-slate-800">Chart displays relative focus areas (Scale 0-10).</span><br>
+                            **0 = Minimal Focus/Competency. 10 = Maximum Focus/Expertise.**
+                            The plot shows the **difference in priority and skills** between Global (Strategy) and Local (Execution) teams.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -305,7 +309,7 @@
                 <div class="flex flex-col lg:flex-row gap-8 mb-6">
                     <div class="lg:w-2/3">
                         <p class="text-slate-600 mb-4">
-                            The RACI model clarifies who is Responsible, Accountable, Consulted, and Informed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
+                            The RACI model clarifies who is **R**esponsible, **A**ccountable, **C**onsulted, and **I**nformed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
                         </p>
                         <p class="text-sm font-semibold text-slate-700">Filter tasks by category below:</p>
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -447,7 +451,7 @@
             { task: 'Regulatory Compliance Check', cat: 'Strategy', global: 'I', region: 'A', local: 'R' },
             { task: 'Incident Investigation (Major)', cat: 'Operations', global: 'I', region: 'C', local: 'A/R' },
             { task: 'Daily Safety Inspections', cat: 'Operations', global: '-', region: '-', local: 'A/R' },
-            { task: 'Select EHS Software', cat: 'Reporting', global: 'A/R', region: 'C', local: 'I' },
+            { task: 'EHS Software (Quentic)', cat: 'Reporting', global: 'A/R', region: 'C', local: 'I' },
             { task: 'ESG/Sustainability Report', cat: 'Reporting', global: 'A/R', region: 'C', local: 'C' },
             { task: 'Machine Guarding Assessment', cat: 'Operations', global: '-', region: 'C', local: 'A/R' },
             { task: 'Hiring Site H&S Manager', cat: 'Strategy', global: 'I', region: 'R', local: 'C' },
