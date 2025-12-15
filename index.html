@@ -57,13 +57,13 @@
          2. Interactive Org Hierarchy: A visual tree representing the 3 tiers (Global, Regional, Site). Users click nodes to see specific responsibilities and KPIs in a detail panel. This now includes specific nodes for Americas and EMEA/Europe.
          3. Competency Balance: A Radar chart comparing the skill requirements for Global vs. Local roles (Strategy vs. Execution).
          4. Reporting Lines Simulator: A toggle section comparing Functional vs. Matrix reporting structures with pros/cons.
-         5. RACI Matrix Explorer: Filterable list of key H&S tasks assigned to different levels.
+         5. RACI Matrix Explorer: Filterable list of key H&S tasks assigned to different levels, now with a mandatory legend for clarity.
          Rationale: This structure moves from the "What" (Hierarchy) to the "Who" (Skills) to the "How" (Reporting/Tasks), ending with "How Many" (Resourcing). -->
     <!-- Visualization & Content Choices:
          1. Org Chart: HTML/CSS Flex/Grid + JS. Goal: Organize. Justification: Best way to show hierarchy without SVG.
          2. Competency Radar: Chart.js Radar. Goal: Compare. Justification: Effectively shows the shift in focus (Strategy vs Ops) across roles.
          3. Reporting Toggle: JS/HTML Switch. Goal: Inform/Change. Justification: Allows user to see the impact of reporting lines interactively.
-         4. RACI Table: JS Filter. Goal: Organize. Justification: Standard tool for roles & responsibilities.
+         4. RACI Table: JS Filter + Dedicated Legend. Goal: Organize. Justification: Standard tool for roles & responsibilities, now clarified with an explicit key for R, A, C, I.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
@@ -286,7 +286,7 @@
                         <div class="space-y-4">
                             <div class="bg-green-50 p-4 rounded-lg border border-green-100">
                                 <h4 class="font-bold text-green-800 text-xs uppercase mb-1">Pros</h4>
-                                <p class="text-sm text-green-900" id="report-pros">High ownership by local operations. H&S is integrated into daily production meetings. Faster decision making locally.</p>
+                                <p class="text-sm text-green-900" id="report-pros">High ownership by local operations. H&S is integrated into daily production meetings. Faster decision making locally. Stronger relationships with shop floor leadership.</p>
                             </div>
                             <div class="bg-red-50 p-4 rounded-lg border border-red-100">
                                 <h4 class="font-bold text-red-800 text-xs uppercase mb-1">Cons</h4>
@@ -301,16 +301,31 @@
         <!-- Section 4: RACI Explorer -->
         <section id="raci" class="py-16 bg-white border-t border-slate-200">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-amber-500 pl-4">Responsibility Assignment (RACI)</h2>
-                <p class="text-slate-600 mb-8 max-w-3xl">
-                    Clear delineation of duties prevents "Shadow Safety" teams and gaps in coverage. Filter the matrix below to see who is Responsible (doer) or Accountable (owner) for key processes.
-                </p>
-
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <button onclick="filterRACI('all')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-800 text-white raci-filter">Show All</button>
-                    <button onclick="filterRACI('Strategy')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Strategy & Standards</button>
-                    <button onclick="filterRACI('Operations')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Operations & Risk</button>
-                    <button onclick="filterRACI('Reporting')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Reporting & Audit</button>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-amber-500 pl-4">Responsibility Assignment (RACI) Matrix</h2>
+                <div class="flex flex-col lg:flex-row gap-8 mb-6">
+                    <div class="lg:w-2/3">
+                        <p class="text-slate-600 mb-4">
+                            The RACI model clarifies who is Responsible, Accountable, Consulted, and Informed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
+                        </p>
+                        <p class="text-sm font-semibold text-slate-700">Filter tasks by category below:</p>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button onclick="filterRACI('all')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-800 text-white raci-filter">Show All</button>
+                            <button onclick="filterRACI('Strategy')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Strategy & Standards</button>
+                            <button onclick="filterRACI('Operations')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Operations & Risk</button>
+                            <button onclick="filterRACI('Reporting')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Reporting & Audit</button>
+                        </div>
+                    </div>
+                    
+                    <!-- RACI Legend/Key -->
+                    <div class="lg:w-1/3 p-4 bg-amber-50 rounded-xl border border-amber-200 shadow-sm">
+                        <h3 class="font-bold text-amber-800 mb-2 uppercase text-sm">RACI Key</h3>
+                        <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                            <p class="font-bold text-amber-900">A - Accountable</p><p class="text-amber-700">Owner (Final decision)</p>
+                            <p class="font-bold text-amber-900">R - Responsible</p><p class="text-amber-700">Doer (Performs the task)</p>
+                            <p class="font-bold text-amber-900">C - Consulted</p><p class="text-amber-700">Expertise required (Two-way)</p>
+                            <p class="font-bold text-amber-900">I - Informed</p><p class="text-amber-700">Kept updated (One-way)</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto shadow-sm border rounded-lg">
