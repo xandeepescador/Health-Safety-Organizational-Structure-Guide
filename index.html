@@ -54,11 +54,10 @@
     <!-- Chosen Palette: Slate (Neutral/Professional) with Blue (Corporate/Global), Emerald (Local/Site), and Amber (Safety/Risk). -->
     <!-- Application Structure Plan: 
          1. Executive Summary: High-level introduction to the Hybrid Model.
-         2. Interactive Org Hierarchy: A visual tree representing the 3 tiers (Global, Regional, Site). Users click nodes to see specific responsibilities and KPIs in a detail panel.
+         2. Interactive Org Hierarchy: A visual tree representing the 3 tiers (Global, Regional, Site). Users click nodes to see specific responsibilities and KPIs in a detail panel. This now includes specific nodes for Americas and EMEA/Europe.
          3. Competency Balance: A Radar chart comparing the skill requirements for Global vs. Local roles (Strategy vs. Execution).
          4. Reporting Lines Simulator: A toggle section comparing Functional vs. Matrix reporting structures with pros/cons.
          5. RACI Matrix Explorer: Filterable list of key H&S tasks assigned to different levels.
-         6. Resource Calculator: Simple input to estimate team size based on risk and headcount.
          Rationale: This structure moves from the "What" (Hierarchy) to the "Who" (Skills) to the "How" (Reporting/Tasks), ending with "How Many" (Resourcing). -->
     <!-- Visualization & Content Choices:
          1. Org Chart: HTML/CSS Flex/Grid + JS. Goal: Organize. Justification: Best way to show hierarchy without SVG.
@@ -125,47 +124,52 @@
                         <div class="org-connector-vertical h-8"></div>
                     </div>
 
-                    <!-- Connector Bar -->
+                    <!-- Connector Bar: Global to Regional -->
                     <div class="w-3/4 mx-auto flex justify-between items-end h-4">
                         <div class="w-1/2 border-t-2 border-r-2 border-slate-300 h-full rounded-tr-lg"></div>
                         <div class="w-1/2 border-t-2 border-l-2 border-slate-300 h-full rounded-tl-lg"></div>
                     </div>
 
-                    <!-- Tier 2: Regional (Row) -->
+                    <!-- Tier 2: Regional (Americas & EMEA) -->
                     <div class="flex justify-center gap-4 mt-0">
-                        <!-- Region 1 -->
+                        <!-- Region Americas -->
                         <div class="flex flex-col items-center">
                             <div class="org-connector-vertical h-4"></div>
-                            <div onclick="updateNodeDetails('regional')" class="cursor-pointer bg-slate-100 hover:bg-blue-50 border-2 border-slate-300 hover:border-blue-500 transition-all p-3 rounded-lg text-center w-40 shadow-sm group" id="node-regional">
-                                <div class="text-xl mb-1">🗺️</div>
-                                <h3 class="font-bold text-sm text-slate-800 group-hover:text-blue-700">Regional / BU Leads</h3>
-                                <p class="text-[10px] text-slate-500">Americas, EMEA, APAC</p>
+                            <div onclick="updateNodeDetails('regional-americas')" class="cursor-pointer bg-slate-100 hover:bg-purple-50 border-2 border-slate-300 hover:border-purple-500 transition-all p-3 rounded-lg text-center w-40 shadow-sm group" id="node-regional-americas">
+                                <div class="text-xl mb-1">🌎</div>
+                                <h3 class="font-bold text-sm text-slate-800 group-hover:text-purple-700">Americas Lead</h3>
+                                <p class="text-[10px] text-slate-500">North & South America</p>
                             </div>
                             <div class="org-connector-vertical h-8"></div>
                         </div>
-                        <!-- Region 2 (Visual filler) -->
-                        <div class="flex flex-col items-center opacity-50">
+                        <!-- Region EMEA (Europe) -->
+                        <div class="flex flex-col items-center">
                             <div class="org-connector-vertical h-4"></div>
-                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg text-center w-40 shadow-sm border-dashed">
-                                <h3 class="font-bold text-sm text-slate-400">Business Unit B</h3>
+                            <div onclick="updateNodeDetails('regional-emea')" class="cursor-pointer bg-slate-100 hover:bg-purple-50 border-2 border-slate-300 hover:border-purple-500 transition-all p-3 rounded-lg text-center w-40 shadow-sm group" id="node-regional-emea">
+                                <div class="text-xl mb-1">🇪🇺</div>
+                                <h3 class="font-bold text-sm text-slate-800 group-hover:text-purple-700">EMEA / Europe Lead</h3>
+                                <p class="text-[10px] text-slate-500">Europe, Middle East, Africa</p>
                             </div>
+                            <div class="org-connector-vertical h-8"></div>
                         </div>
                     </div>
 
-                    <!-- Tier 3: Local (Row) -->
+                    <!-- Regional to Local connection bar -->
                     <div class="flex justify-center gap-2 mt-0">
                          <div class="w-full flex justify-center">
                              <div class="border-t-2 border-slate-300 w-40"></div>
                          </div>
                     </div>
-                     <div class="flex justify-center gap-4">
+                     
+                    <!-- Tier 3: Local -->
+                    <div class="flex justify-center gap-4">
                         <div onclick="updateNodeDetails('local')" class="cursor-pointer bg-slate-100 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-500 transition-all p-3 rounded-lg text-center w-36 shadow-sm group mt-4" id="node-local">
                             <div class="text-xl mb-1">🏭</div>
                             <h3 class="font-bold text-sm text-slate-800 group-hover:text-emerald-700">Site / Local H&S</h3>
                             <p class="text-[10px] text-slate-500">Plant Managers & Advisors</p>
                         </div>
                         <div class="bg-slate-50 border border-slate-200 border-dashed p-3 rounded-lg text-center w-36 shadow-sm mt-4 opacity-50 flex items-center justify-center">
-                            <span class="text-xs text-slate-400">Site B...</span>
+                            <span class="text-xs text-slate-400">Other Sites...</span>
                         </div>
                     </div>
 
@@ -356,21 +360,37 @@
                 kpi: 'TRIR (Global), Leading Indicator Participation, Audit Closure Rate, Sustainability Indices.',
                 roles: 'VP EHS, Global Director of Occ Health, Systems Manager, ESG Lead.'
             },
-            'regional': {
-                title: 'Regional / Business Unit H&S',
-                icon: '🗺️',
+            'regional-americas': {
+                title: 'Americas Regional Lead',
+                icon: '🌎',
                 tier: 'TIER 2',
                 color: 'purple',
-                purpose: 'To translate global strategy into regional action, ensuring compliance with local legislation (e.g., OSHA, EU Directives) and supporting sites with specialized technical expertise.',
+                purpose: 'To translate global strategy into regional action, focusing on North and South American regulatory alignment, ensuring compliance with OSHA and regional standards.',
                 responsibilities: [
-                    '• Interpreting Local Legislation vs. Global Standards',
+                    '• Interpreting OSHA/National Legislation vs. Global Standards',
                     '• Coordinating Regional Audits',
                     '• Mentoring Site H&S Managers',
-                    '• Facilitating Cross-Site Best Practice Sharing',
-                    '• Aggregating Regional Data'
+                    '• Facilitating Cross-Site Best Practice Sharing in the region',
+                    '• Aggregating Regional Data for the Americas'
                 ],
                 kpi: 'Regional Compliance Score, Training Completion %, Timely Incident Investigation Closure.',
-                roles: 'Regional EHS Director, Environmental Specialist, Industrial Hygienist.'
+                roles: 'Americas EHS Director, Environmental Specialist, Industrial Hygienist.'
+            },
+            'regional-emea': {
+                title: 'EMEA / Europe Regional Lead',
+                icon: '🇪🇺',
+                tier: 'TIER 2',
+                color: 'purple',
+                purpose: 'To translate global strategy into regional action, focusing on European and related regulatory alignment, ensuring compliance with EU Directives and country-specific legislation.',
+                responsibilities: [
+                    '• Interpreting EU Directives/Country Legislation vs. Global Standards',
+                    '• Coordinating Regional Audits, especially those related to EU regulations',
+                    '• Mentoring Site H&S Managers across European sites',
+                    '• Facilitating Cross-Site Best Practice Sharing in the region',
+                    '• Aggregating Regional Data for EMEA'
+                ],
+                kpi: 'EU Directive Compliance Rate, Training Completion %, Incident Rate Reduction in Key Markets.',
+                roles: 'EMEA EHS Director, Regulatory Compliance Specialist, Occ. Health Coordinator.'
             },
             'local': {
                 title: 'Site / Local H&S',
@@ -455,7 +475,7 @@
                             angleLines: { display: true },
                             suggestedMin: 0,
                             suggestedMax: 10,
-                            ticks: { display: false } // Hide numbers for cleaner look
+                            ticks: { display: false }
                         }
                     },
                     plugins: {
@@ -477,12 +497,13 @@
 
             // Animate Panel content
             panel.classList.remove('fade-in');
-            void panel.offsetWidth; // trigger reflow
+            void panel.offsetWidth;
             panel.classList.add('fade-in');
 
             // Update Color Themes
-            panel.className = `lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border-t-4 border-${data.color}-500 transition-all duration-300 fade-in`;
-            document.getElementById('detail-tier').className = `uppercase tracking-wider text-xs font-bold text-${data.color}-600 mb-1 block`;
+            const color = data.color === 'purple' ? 'purple' : data.color;
+            panel.className = `lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border-t-4 border-${color}-500 transition-all duration-300 fade-in`;
+            document.getElementById('detail-tier').className = `uppercase tracking-wider text-xs font-bold text-${color}-600 mb-1 block`;
             
             // Update Text Content
             document.getElementById('detail-tier').textContent = data.tier;
@@ -526,7 +547,7 @@
 
         function filterRACI(category) {
             const tbody = document.getElementById('raci-body');
-            tbody.innerHTML = ''; // Clear current
+            tbody.innerHTML = '';
 
             // Button visual state
             document.querySelectorAll('.raci-filter').forEach(btn => {
@@ -565,6 +586,8 @@
         window.addEventListener('DOMContentLoaded', () => {
             initCharts();
             filterRACI('all');
+            // Ensure initial display shows Global details (even though it's set by default in HTML, this enforces correct node coloring)
+            updateNodeDetails('global'); 
         });
 
     </script>
