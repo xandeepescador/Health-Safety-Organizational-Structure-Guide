@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Health & Safety Organization Structure Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+
+        /* Organizational Chart Connector Lines */
+        .org-connector-vertical {
+            width: 2px;
+            background-color: #cbd5e1;
+            margin: 0 auto;
+        }
+        .org-connector-horizontal {
+            height: 2px;
+            background-color: #cbd5e1;
+            margin: 0 auto;
+        }
+        
+        .active-node {
+            ring-width: 4px;
+            ring-color: #3b82f6; 
+            background-color: #eff6ff !important;
+            border-color: #3b82f6 !important;
+        }
+        
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+    <!-- Chosen Palette: Slate (Neutral/Professional) with Blue (Corporate/Global), Emerald (Local/Site), and Amber (Safety/Risk). -->
+    <!-- Application Structure Plan: 
+         1. Executive Summary: High-level introduction to the Hybrid Model.
+         2. Interactive Org Hierarchy: A visual tree representing the 3 tiers (Global, Regional, Site). Users click nodes to see specific responsibilities and KPIs in a detail panel.
+         3. Competency Balance: A Radar chart comparing the skill requirements for Global vs. Local roles (Strategy vs. Execution).
+         4. Reporting Lines Simulator: A toggle section comparing Functional vs. Matrix reporting structures with pros/cons.
+         5. RACI Matrix Explorer: Filterable list of key H&S tasks assigned to different levels.
+         6. Resource Calculator: Simple input to estimate team size based on risk and headcount.
+         Rationale: This structure moves from the "What" (Hierarchy) to the "Who" (Skills) to the "How" (Reporting/Tasks), ending with "How Many" (Resourcing). -->
+    <!-- Visualization & Content Choices:
+         1. Org Chart: HTML/CSS Flex/Grid + JS. Goal: Organize. Justification: Best way to show hierarchy without SVG.
+         2. Competency Radar: Chart.js Radar. Goal: Compare. Justification: Effectively shows the shift in focus (Strategy vs Ops) across roles.
+         3. Reporting Toggle: JS/HTML Switch. Goal: Inform/Change. Justification: Allows user to see the impact of reporting lines interactively.
+         4. RACI Table: JS Filter. Goal: Organize. Justification: Standard tool for roles & responsibilities.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <span class="text-2xl font-bold text-slate-800 tracking-tight">Global<span class="text-blue-600">H&S</span>Design</span>
+                    </div>
+                </div>
+                <div class="hidden sm:flex sm:items-center sm:space-x-8">
+                    <button onclick="scrollToSection('structure')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Org Structure</button>
+                    <button onclick="scrollToSection('competencies')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Competency Model</button>
+                    <button onclick="scrollToSection('reporting')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Reporting Lines</button>
+                    <button onclick="scrollToSection('raci')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">RACI Matrix</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Header / Intro -->
+        <div class="bg-white py-12 border-b border-slate-200">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Structuring the Modern Global H&S Function</h1>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    Effective Health & Safety organizations in global companies require a delicate balance between <span class="font-semibold text-blue-600">Centralized Strategy</span> and <span class="font-semibold text-emerald-600">Localized Execution</span>. Explore this interactive guide to understand the tiered "Center of Excellence" model, reporting lines, and resource allocation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 1: Interactive Hierarchy -->
+        <section id="structure" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-500 pl-4">The Tiered Organization Model</h2>
+                <p class="text-slate-600 max-w-3xl">
+                    Most successful global firms utilize a 3-tier structure. This ensures corporate sets the "North Star" (Standards & Systems) while local teams focus on risk reduction and cultural engagement. <br><span class="font-semibold text-sm text-blue-600 mt-2 block">Instruction: Click on the boxes in the diagram below to reveal detailed responsibilities and KPIs for each level.</span>
+                </p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Visual Org Chart (Left) -->
+                <div class="lg:w-1/2 bg-white p-6 rounded-xl shadow-sm border border-slate-200 select-none">
+                    
+                    <!-- Tier 1: Global -->
+                    <div class="flex flex-col items-center">
+                        <div onclick="updateNodeDetails('global')" class="cursor-pointer bg-slate-100 hover:bg-blue-50 border-2 border-slate-300 hover:border-blue-500 transition-all p-4 rounded-lg text-center w-64 shadow-sm group active-node" id="node-global">
+                            <div class="text-2xl mb-1">🌍</div>
+                            <h3 class="font-bold text-slate-800 group-hover:text-blue-700">Corporate / Global H&S</h3>
+                            <p class="text-xs text-slate-500">VP of EHS & Centers of Excellence</p>
+                        </div>
+                        <div class="org-connector-vertical h-8"></div>
+                    </div>
+
+                    <!-- Connector Bar -->
+                    <div class="w-3/4 mx-auto flex justify-between items-end h-4">
+                        <div class="w-1/2 border-t-2 border-r-2 border-slate-300 h-full rounded-tr-lg"></div>
+                        <div class="w-1/2 border-t-2 border-l-2 border-slate-300 h-full rounded-tl-lg"></div>
+                    </div>
+
+                    <!-- Tier 2: Regional (Row) -->
+                    <div class="flex justify-center gap-4 mt-0">
+                        <!-- Region 1 -->
+                        <div class="flex flex-col items-center">
+                            <div class="org-connector-vertical h-4"></div>
+                            <div onclick="updateNodeDetails('regional')" class="cursor-pointer bg-slate-100 hover:bg-blue-50 border-2 border-slate-300 hover:border-blue-500 transition-all p-3 rounded-lg text-center w-40 shadow-sm group" id="node-regional">
+                                <div class="text-xl mb-1">🗺️</div>
+                                <h3 class="font-bold text-sm text-slate-800 group-hover:text-blue-700">Regional / BU Leads</h3>
+                                <p class="text-[10px] text-slate-500">Americas, EMEA, APAC</p>
+                            </div>
+                            <div class="org-connector-vertical h-8"></div>
+                        </div>
+                        <!-- Region 2 (Visual filler) -->
+                        <div class="flex flex-col items-center opacity-50">
+                            <div class="org-connector-vertical h-4"></div>
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-lg text-center w-40 shadow-sm border-dashed">
+                                <h3 class="font-bold text-sm text-slate-400">Business Unit B</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tier 3: Local (Row) -->
+                    <div class="flex justify-center gap-2 mt-0">
+                         <div class="w-full flex justify-center">
+                             <div class="border-t-2 border-slate-300 w-40"></div>
+                         </div>
+                    </div>
+                     <div class="flex justify-center gap-4">
+                        <div onclick="updateNodeDetails('local')" class="cursor-pointer bg-slate-100 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-500 transition-all p-3 rounded-lg text-center w-36 shadow-sm group mt-4" id="node-local">
+                            <div class="text-xl mb-1">🏭</div>
+                            <h3 class="font-bold text-sm text-slate-800 group-hover:text-emerald-700">Site / Local H&S</h3>
+                            <p class="text-[10px] text-slate-500">Plant Managers & Advisors</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 border-dashed p-3 rounded-lg text-center w-36 shadow-sm mt-4 opacity-50 flex items-center justify-center">
+                            <span class="text-xs text-slate-400">Site B...</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Details Panel (Right) -->
+                <div class="lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-600 transition-all duration-300" id="details-panel">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <span class="uppercase tracking-wider text-xs font-bold text-blue-600 mb-1 block" id="detail-tier">TIER 1</span>
+                            <h3 class="text-2xl font-bold text-slate-900" id="detail-title">Corporate / Global H&S</h3>
+                        </div>
+                        <div class="text-4xl" id="detail-icon">🌍</div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-slate-800 mb-2 flex items-center">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>Core Purpose
+                            </h4>
+                            <p class="text-slate-600 text-sm leading-relaxed" id="detail-purpose">
+                                To set the strategic direction, define global standards (ISO 45001 alignment), manage EHS software systems, and report ESG performance to the C-Suite and Board.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-slate-800 mb-2 text-sm">Key Responsibilities</h4>
+                            <ul class="text-sm text-slate-600 space-y-2" id="detail-responsibilities">
+                                <li>• Developing Global Standards & Policies</li>
+                                <li>• Managing Global EHS Software (Data Architecture)</li>
+                                <li>• Corporate Auditing & Governance</li>
+                                <li>• Sustainability & ESG Reporting</li>
+                            </ul>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="text-xs font-bold text-blue-800 uppercase mb-1">KPI Focus</h5>
+                                <p class="text-sm text-blue-900 font-medium" id="detail-kpi">TRIR (Global), Leading Indicator Participation, Audit Closure Rate.</p>
+                            </div>
+                            <div class="bg-amber-50 p-3 rounded-lg">
+                                <h5 class="text-xs font-bold text-amber-800 uppercase mb-1">Typical Roles</h5>
+                                <p class="text-sm text-amber-900 font-medium" id="detail-roles">VP EHS, Global Director of Occ Health, Systems Manager.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Competency & Focus Balance -->
+        <section id="competencies" class="bg-white py-16 border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/2">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-emerald-500 pl-4">Shifting Competencies: Strategy vs. Execution</h2>
+                        <p class="text-slate-600 mb-6">
+                            As you move from Global to Local, the required skillset shifts dramatically. Corporate teams require high business acumen and systems thinking, while local teams require deep technical safety knowledge and operational influence.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-slate-900 text-sm">Global Profile</h4>
+                                <p class="text-xs text-slate-600 mt-1">Focus on data analysis, change management, executive influence, and standardizing processes across diverse cultures.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-emerald-500">
+                                <h4 class="font-bold text-slate-900 text-sm">Local Profile</h4>
+                                <p class="text-xs text-slate-600 mt-1">Focus on hazard recognition, regulatory compliance (OSHA/HSE), employee training, and emergency response.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 w-full flex flex-col items-center">
+                        <div class="chart-container">
+                            <canvas id="competencyChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2 text-center">Chart displays relative focus areas (Scale 0-10)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Reporting Lines Simulator -->
+        <section id="reporting" class="py-16 bg-slate-50">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-slate-900">Reporting Lines: Functional vs. Matrix</h2>
+                    <p class="text-slate-600 mt-2">Who hires, fires, and reviews the performance of the local H&S Manager? This is the most critical structural decision.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="flex border-b border-slate-200">
+                        <button onclick="setReporting('matrix')" id="btn-matrix" class="flex-1 py-4 text-center font-bold text-sm bg-blue-50 text-blue-700 border-b-2 border-blue-600 transition-colors">Matrix Reporting (Hybrid)</button>
+                        <button onclick="setReporting('functional')" id="btn-functional" class="flex-1 py-4 text-center font-bold text-sm text-slate-500 hover:bg-slate-50 transition-colors">Functional Reporting (Centralized)</button>
+                    </div>
+
+                    <div class="p-8 grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-4" id="report-title">Matrix Structure</h3>
+                            <div id="report-diagram" class="mb-6 p-4 bg-slate-100 rounded-lg h-32 flex items-center justify-center">
+                                <!-- Diagram drawn via JS or simple text visual -->
+                                <div class="text-center text-sm">
+                                    <span class="font-bold text-blue-600">Site Ops Manager</span> 
+                                    <span class="text-slate-400 mx-2">── Solid ──</span> 
+                                    <span class="bg-white px-2 py-1 border rounded shadow-sm font-bold">Site H&S</span>
+                                    <span class="text-slate-400 mx-2">·· Dotted ··</span>
+                                    <span class="font-bold text-emerald-600">Global H&S</span>
+                                </div>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed" id="report-desc">
+                                The Site H&S Manager reports primarily to the Site Plant Manager (Solid Line) for daily direction, with a secondary reporting line to Global/Regional H&S (Dotted Line) for technical standards and career development.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                                <h4 class="font-bold text-green-800 text-xs uppercase mb-1">Pros</h4>
+                                <p class="text-sm text-green-900" id="report-pros">High ownership by local operations. H&S is integrated into daily production meetings. Faster decision making locally.</p>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+                                <h4 class="font-bold text-red-800 text-xs uppercase mb-1">Cons</h4>
+                                <p class="text-sm text-red-900" id="report-cons">Potential conflict of interest if Ops Manager prioritizes production over safety. H&S Manager may feel isolated from the global function.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: RACI Explorer -->
+        <section id="raci" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-amber-500 pl-4">Responsibility Assignment (RACI)</h2>
+                <p class="text-slate-600 mb-8 max-w-3xl">
+                    Clear delineation of duties prevents "Shadow Safety" teams and gaps in coverage. Filter the matrix below to see who is Responsible (doer) or Accountable (owner) for key processes.
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button onclick="filterRACI('all')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-800 text-white raci-filter">Show All</button>
+                    <button onclick="filterRACI('Strategy')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Strategy & Standards</button>
+                    <button onclick="filterRACI('Operations')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Operations & Risk</button>
+                    <button onclick="filterRACI('Reporting')" class="px-4 py-2 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 raci-filter">Reporting & Audit</button>
+                </div>
+
+                <div class="overflow-x-auto shadow-sm border rounded-lg">
+                    <table class="min-w-full divide-y divide-slate-200 text-sm">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left font-bold text-slate-700 uppercase tracking-wider">Process / Task</th>
+                                <th class="px-6 py-3 text-center font-bold text-slate-700 uppercase tracking-wider">Category</th>
+                                <th class="px-6 py-3 text-center font-bold text-blue-600">Global H&S</th>
+                                <th class="px-6 py-3 text-center font-bold text-purple-600">Regional H&S</th>
+                                <th class="px-6 py-3 text-center font-bold text-emerald-600">Site H&S</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200" id="raci-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-4 text-slate-100 font-bold">Global H&S Design Guide</p>
+            <p class="text-xs">Based on ISO 45001 Organizational Roles, Responsibilities and Authorities guidelines.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA STORE ---
+        const nodeData = {
+            'global': {
+                title: 'Corporate / Global H&S',
+                icon: '🌍',
+                tier: 'TIER 1',
+                color: 'blue',
+                purpose: 'To set the strategic direction, define global standards (ISO 45001 alignment), manage EHS software systems, and report ESG performance to the C-Suite and Board.',
+                responsibilities: [
+                    '• Developing Global Standards & Policies',
+                    '• Managing Global EHS Software (Data Architecture)',
+                    '• Corporate Auditing & Governance',
+                    '• Sustainability & ESG Reporting',
+                    '• Management Review with Executive Committee'
+                ],
+                kpi: 'TRIR (Global), Leading Indicator Participation, Audit Closure Rate, Sustainability Indices.',
+                roles: 'VP EHS, Global Director of Occ Health, Systems Manager, ESG Lead.'
+            },
+            'regional': {
+                title: 'Regional / Business Unit H&S',
+                icon: '🗺️',
+                tier: 'TIER 2',
+                color: 'purple',
+                purpose: 'To translate global strategy into regional action, ensuring compliance with local legislation (e.g., OSHA, EU Directives) and supporting sites with specialized technical expertise.',
+                responsibilities: [
+                    '• Interpreting Local Legislation vs. Global Standards',
+                    '• Coordinating Regional Audits',
+                    '• Mentoring Site H&S Managers',
+                    '• Facilitating Cross-Site Best Practice Sharing',
+                    '• Aggregating Regional Data'
+                ],
+                kpi: 'Regional Compliance Score, Training Completion %, Timely Incident Investigation Closure.',
+                roles: 'Regional EHS Director, Environmental Specialist, Industrial Hygienist.'
+            },
+            'local': {
+                title: 'Site / Local H&S',
+                icon: '🏭',
+                tier: 'TIER 3',
+                color: 'emerald',
+                purpose: 'To execute the H&S management system daily on the shop floor, engaging directly with workers, managing immediate risks, and fostering a positive safety culture.',
+                responsibilities: [
+                    '• Daily Shop Floor Inspections & Gemba Walks',
+                    '• Managing Permit to Work (PTW) Systems',
+                    '• Incident Response & Root Cause Analysis',
+                    '• Conducting Safety Committee Meetings',
+                    '• Contractor Management'
+                ],
+                kpi: 'Hazard Identification Rate, Safe Behavior Observations, Near Miss Reporting, Corrective Action On-Time Closure.',
+                roles: 'Site EHS Manager, Safety Specialist, Emergency Coordinator.'
+            }
+        };
+
+        const reportingData = {
+            'matrix': {
+                title: 'Matrix Structure (Hybrid)',
+                diagram: '<span class="font-bold text-blue-600">Site Ops Mgr</span> <span class="text-slate-400 mx-2">── Solid ──</span> <span class="bg-white px-2 py-1 border rounded shadow-sm font-bold">Site H&S</span> <span class="text-slate-400 mx-2">·· Dotted ··</span> <span class="font-bold text-emerald-600">Global H&S</span>',
+                desc: 'The Site H&S Manager reports primarily to the Site Plant Manager (Solid Line) for daily direction, with a secondary reporting line to Global/Regional H&S (Dotted Line) for technical standards, hiring, and career development.',
+                pros: 'High ownership by local operations. H&S is integrated into daily production meetings. Faster decision making locally. Stronger relationships with shop floor leadership.',
+                cons: 'Potential conflict of interest if Ops Manager prioritizes production over safety. H&S Manager may feel isolated from the global function. Inconsistent standards application across sites.'
+            },
+            'functional': {
+                title: 'Functional Structure (Centralized)',
+                diagram: '<span class="font-bold text-blue-600">Site Ops Mgr</span> <span class="text-slate-400 mx-2">·· Dotted ··</span> <span class="bg-white px-2 py-1 border rounded shadow-sm font-bold">Site H&S</span> <span class="text-slate-400 mx-2">── Solid ──</span> <span class="font-bold text-emerald-600">Global H&S</span>',
+                desc: 'The Site H&S Manager reports directly to the Regional/Global H&S Director (Solid Line). The relationship with the Site Plant Manager is advisory (Dotted Line).',
+                pros: 'Independence of the safety function (no pressure to ignore risks for production). Consistent application of global standards. Clear career path within H&S function.',
+                cons: '"Us vs. Them" mentality can develop between Ops and H&S. H&S viewed as "policemen" rather than partners. Slower response to daily operational changes.'
+            }
+        };
+
+        const raciData = [
+            { task: 'Set Global H&S Policy', cat: 'Strategy', global: 'A/R', region: 'I', local: 'I' },
+            { task: 'Regulatory Compliance Check', cat: 'Strategy', global: 'I', region: 'A', local: 'R' },
+            { task: 'Incident Investigation (Major)', cat: 'Operations', global: 'I', region: 'C', local: 'A/R' },
+            { task: 'Daily Safety Inspections', cat: 'Operations', global: '-', region: '-', local: 'A/R' },
+            { task: 'Select EHS Software', cat: 'Reporting', global: 'A/R', region: 'C', local: 'I' },
+            { task: 'ESG/Sustainability Report', cat: 'Reporting', global: 'A/R', region: 'C', local: 'C' },
+            { task: 'Machine Guarding Assessment', cat: 'Operations', global: '-', region: 'C', local: 'A/R' },
+            { task: 'Hiring Site H&S Manager', cat: 'Strategy', global: 'I', region: 'R', local: 'C' },
+        ];
+
+        // --- VISUALIZATION SETUP (Chart.js) ---
+        let competencyChart;
+
+        function initCharts() {
+            const ctx = document.getElementById('competencyChart').getContext('2d');
+            competencyChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Strategic Planning', 'Data Analytics', 'Regulatory/Legal', 'Technical Safety', 'Training Delivery', 'Ops Influence'],
+                    datasets: [
+                        {
+                            label: 'Global/Corporate',
+                            data: [9, 9, 6, 5, 2, 6],
+                            fill: true,
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            pointBackgroundColor: 'rgb(59, 130, 246)',
+                        },
+                        {
+                            label: 'Local/Site',
+                            data: [3, 4, 8, 9, 9, 9],
+                            fill: true,
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: 'rgb(16, 185, 129)',
+                            pointBackgroundColor: 'rgb(16, 185, 129)',
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    elements: { line: { borderWidth: 3 } },
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                            ticks: { display: false } // Hide numbers for cleaner look
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        // --- INTERACTION LOGIC ---
+
+        function updateNodeDetails(nodeId) {
+            const data = nodeData[nodeId];
+            const panel = document.getElementById('details-panel');
+            
+            // Visual Active State management
+            document.querySelectorAll('.active-node').forEach(el => el.classList.remove('active-node'));
+            document.getElementById('node-' + nodeId).classList.add('active-node');
+
+            // Animate Panel content
+            panel.classList.remove('fade-in');
+            void panel.offsetWidth; // trigger reflow
+            panel.classList.add('fade-in');
+
+            // Update Color Themes
+            panel.className = `lg:w-1/2 bg-white p-8 rounded-xl shadow-lg border-t-4 border-${data.color}-500 transition-all duration-300 fade-in`;
+            document.getElementById('detail-tier').className = `uppercase tracking-wider text-xs font-bold text-${data.color}-600 mb-1 block`;
+            
+            // Update Text Content
+            document.getElementById('detail-tier').textContent = data.tier;
+            document.getElementById('detail-title').textContent = data.title;
+            document.getElementById('detail-icon').textContent = data.icon;
+            document.getElementById('detail-purpose').textContent = data.purpose;
+            document.getElementById('detail-kpi').textContent = data.kpi;
+            document.getElementById('detail-roles').textContent = data.roles;
+
+            const list = document.getElementById('detail-responsibilities');
+            list.innerHTML = '';
+            data.responsibilities.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+
+        function setReporting(type) {
+            const data = reportingData[type];
+            
+            // Button Styles
+            const btnMatrix = document.getElementById('btn-matrix');
+            const btnFunctional = document.getElementById('btn-functional');
+            
+            if(type === 'matrix') {
+                btnMatrix.className = "flex-1 py-4 text-center font-bold text-sm bg-blue-50 text-blue-700 border-b-2 border-blue-600 transition-colors";
+                btnFunctional.className = "flex-1 py-4 text-center font-bold text-sm text-slate-500 hover:bg-slate-50 transition-colors";
+            } else {
+                btnMatrix.className = "flex-1 py-4 text-center font-bold text-sm text-slate-500 hover:bg-slate-50 transition-colors";
+                btnFunctional.className = "flex-1 py-4 text-center font-bold text-sm bg-emerald-50 text-emerald-700 border-b-2 border-emerald-600 transition-colors";
+            }
+
+            // Content Updates
+            document.getElementById('report-title').textContent = data.title;
+            document.getElementById('report-diagram').innerHTML = `<div class="text-center text-sm">${data.diagram}</div>`;
+            document.getElementById('report-desc').textContent = data.desc;
+            document.getElementById('report-pros').textContent = data.pros;
+            document.getElementById('report-cons').textContent = data.cons;
+        }
+
+        function filterRACI(category) {
+            const tbody = document.getElementById('raci-body');
+            tbody.innerHTML = ''; // Clear current
+
+            // Button visual state
+            document.querySelectorAll('.raci-filter').forEach(btn => {
+                if(btn.textContent.includes(category) || (category === 'all' && btn.textContent === 'Show All')) {
+                    btn.classList.add('bg-slate-800', 'text-white');
+                    btn.classList.remove('bg-slate-100', 'text-slate-600');
+                } else {
+                    btn.classList.remove('bg-slate-800', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-600');
+                }
+            });
+
+            const filteredData = category === 'all' ? raciData : raciData.filter(item => item.cat.includes(category));
+
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-slate-700 font-medium">${row.task}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center text-xs text-slate-500 uppercase">${row.cat}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center text-slate-600 font-mono">${row.global}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center text-slate-600 font-mono">${row.region}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center text-slate-600 font-mono">${row.local}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            filterRACI('all');
+        });
+
+    </script>
+</body>
+</html>
