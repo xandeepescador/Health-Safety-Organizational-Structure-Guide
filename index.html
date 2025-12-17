@@ -50,21 +50,20 @@
         
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .citation { font-size: 0.75rem; vertical-align: super; color: #64748b; margin-left: 2px; cursor: pointer; }
     </style>
     <!-- Chosen Palette: Slate (Neutral/Professional) with Blue (Corporate/Global), Emerald (Local/Site), and Amber (Safety/Risk). -->
     <!-- Application Structure Plan: 
-         1. Executive Summary: High-level introduction to the Hybrid Model.
-         2. Interactive Org Hierarchy: A visual tree representing the 3 tiers (Global, Regional, Site). Users click nodes to see specific responsibilities and KPIs in a detail panel. This now includes specific nodes for Americas and EMEA/Europe.
-         3. Competency Balance: A Radar chart comparing the skill requirements for Global vs. Local roles (Strategy vs. Execution), now with explicit textual clarification about the 0-10 scale.
-         4. Reporting Lines Simulator: A toggle section comparing Functional vs. Matrix reporting structures with pros/cons.
-         5. RACI Matrix Explorer: Filterable list of key H&S tasks assigned to different levels, now with a mandatory legend for clarity.
-         Rationale: This structure moves from the "What" (Hierarchy) to the "Who" (Skills) to the "How" (Reporting/Tasks), ending with "How Many" (Resourcing). -->
-    <!-- Visualization & Content Choices:
-         1. Org Chart: HTML/CSS Flex/Grid + JS. Goal: Organize. Justification: Best way to show hierarchy without SVG.
-         2. Competency Radar: Chart.js Radar. Goal: Compare. Justification: Effectively shows the shift in focus (Strategy vs Ops) across roles. Explicitly clarifies the 0-10 scale represents relative priority/competency, defining 0 and 10.
-         3. Reporting Toggle: JS/HTML Switch. Goal: Inform/Change. Justification: Allows user to see the impact of reporting lines interactively.
-         4. RACI Table: JS Filter + Dedicated Legend. Goal: Organize. Justification: Standard tool for roles & responsibilities, now clarified with an explicit key for R, A, C, I.
-    -->
+         1. Header/Strategic Foundation (Page 1).
+         2. Interactive Org Hierarchy (Structure).
+         3. Competency Balance (Talent Focus).
+         4. EHS Structural Models & Reporting Lines (CONSOLIDATED SECTION).
+         5. RACI Matrix Explorer (Accountability).
+         6. Driving Behavioral Change (Leadership/Culture focus).
+         7. Business Case & Costs (Page 2, 11).
+         8. Action Plan (Page 12).
+         9. Sources (All external and internal sources listed and linked via citations). -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col">
@@ -80,9 +79,11 @@
                 </div>
                 <div class="hidden sm:flex sm:items-center sm:space-x-8">
                     <button onclick="scrollToSection('structure')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Org Structure</button>
-                    <button onclick="scrollToSection('competencies')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Competency Model</button>
-                    <button onclick="scrollToSection('reporting')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Reporting Lines</button>
+                    <button onclick="scrollToSection('models')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">EHS Models</button>
+                    <button onclick="scrollToSection('business-case')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">The Why</button>
                     <button onclick="scrollToSection('raci')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">RACI Matrix</button>
+                    <button onclick="scrollToSection('action-plan')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Action Plan</button>
+                    <button onclick="scrollToSection('sources')" class="text-slate-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Sources</button>
                 </div>
             </div>
         </div>
@@ -91,22 +92,46 @@
     <!-- Main Content -->
     <main class="flex-grow">
         
-        <!-- Header / Intro -->
+        <!-- Header / Strategic Foundation (Page 1 content, now with icons) -->
         <div class="bg-white py-12 border-b border-slate-200">
-            <div class="max-w-4xl mx-auto px-4 text-center">
-                <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Structuring the Modern Global H&S Function</h1>
-                <p class="text-lg text-slate-600 leading-relaxed">
-                    Effective Health & Safety organizations in global companies require a delicate balance between <span class="font-semibold text-blue-600">Centralized Strategy</span> and <span class="font-semibold text-emerald-600">Localized Execution</span>. Explore this interactive guide to understand the tiered "Center of Excellence" model, reporting lines, and resource allocation.
+            <div class="max-w-6xl mx-auto px-4 text-center">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-4">The Architecture of Advantage</h1>
+                <p class="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+                    Designing your EHS structure for **Peak Performance** is a strategic imperative, transforming EHS from a cost center to a performance driver.
                 </p>
+
+                <div class="grid md:grid-cols-4 gap-6 mt-10 text-center max-w-5xl mx-auto">
+                    
+                    <div class="p-4 bg-blue-50 rounded-xl shadow-md border border-blue-200 flex flex-col items-center">
+                        <div class="text-4xl text-blue-700 mb-2">⭐</div>
+                        <span class="text-blue-800 font-bold text-sm block">LEADERSHIP & VISION</span>
+                        <p class="text-xs text-slate-600 mt-1">Clear Objectives, Culture of Safety.</p>
+                    </div>
+                    <div class="p-4 bg-emerald-50 rounded-xl shadow-md border border-emerald-200 flex flex-col items-center">
+                        <div class="text-4xl text-emerald-700 mb-2">🛡️</div>
+                        <span class="text-emerald-800 font-bold text-sm block">RISK MITIGATION FRAMEWORK</span>
+                        <p class="text-xs text-slate-600 mt-1">Proactive Hazard ID, Compliance Assurance.</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-xl shadow-md border border-purple-200 flex flex-col items-center">
+                        <div class="text-4xl text-purple-700 mb-2">📈</div>
+                        <span class="text-purple-800 font-bold text-sm block">PERFORMANCE OPTIMIZATION</span>
+                        <p class="text-xs text-slate-600 mt-1">Process Efficiency, Continuous Improvement.</p>
+                    </div>
+                    <div class="p-4 bg-amber-50 rounded-xl shadow-md border border-amber-200 flex flex-col items-center">
+                        <div class="text-4xl text-amber-700 mb-2">🤝</div>
+                        <span class="text-amber-800 font-bold text-sm block">STAKEHOLDER ENGAGEMENT</span>
+                        <p class="text-xs text-slate-600 mt-1">Employee Involvement, Regulatory Partnership.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Section 1: Interactive Hierarchy -->
+        <!-- Section 1: Interactive Hierarchy (The How) -->
         <section id="structure" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-500 pl-4">The Tiered Organization Model</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-500 pl-4">The Tiered Organization Model (Hybrid/Matrix)</h2>
                 <p class="text-slate-600 max-w-3xl">
-                    Most successful global firms utilize a 3-tier structure. This ensures corporate sets the "North Star" (Standards & Systems) while local teams focus on risk reduction and cultural engagement. <br><span class="font-semibold text-sm text-blue-600 mt-2 block">Instruction: Click on the boxes in the diagram below to reveal detailed responsibilities and KPIs for each level.</span>
+                    Most successful global firms utilize a 3-tier structure to balance global governance (Tier 1) with localized execution (Tier 3). This synthesis is achieved through the **Matrix Structure** which ensures dual accountability.<span class="citation" onclick="scrollToSection('citation-16')">[16]</span> <br><span class="font-semibold text-sm text-blue-600 mt-2 block">Instruction: Click on the boxes in the diagram below to reveal detailed responsibilities and KPIs for each level.</span>
                 </p>
             </div>
 
@@ -163,7 +188,7 @@
                      
                     <!-- Tier 3: Local -->
                     <div class="flex justify-center gap-4">
-                        <div onclick="updateNodeDetails('local')" class="cursor-pointer bg-slate-100 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-500 transition-all p-3 rounded-lg text-center w-36 shadow-sm group mt-4" id="node-local">
+                        <div onclick="updateNodeDetails('local')" class="cursor-pointer bg-slate-100 hover:bg-emerald-50 border-2 border-slate-300 hover:border-emerald-500 transition-all p-3 rounded-lg text-center w-36 shadow-sm group" id="node-local">
                             <div class="text-xl mb-1">🏭</div>
                             <h3 class="font-bold text-sm text-slate-800 group-hover:text-emerald-700">Site / Local H&S</h3>
                             <p class="text-[10px] text-slate-500">Plant Managers & Advisors</p>
@@ -198,9 +223,9 @@
                         <div class="bg-slate-50 p-4 rounded-lg">
                             <h4 class="font-bold text-slate-800 mb-2 text-sm">Key Responsibilities</h4>
                             <ul class="text-sm text-slate-600 space-y-2" id="detail-responsibilities">
-                                <li>• Developing Global Standards & Policies</li>
+                                <li>• Developing Global Standards & Policies<span class="citation" onclick="scrollToSection('citation-1')">[1]</span></li>
                                 <li>• Managing Global EHS Software (Data Architecture)</li>
-                                <li>• Corporate Auditing & Governance</li>
+                                <li>• Corporate Auditing & Governance<span class="citation" onclick="scrollToSection('citation-2')">[2]</span></li>
                                 <li>• Sustainability & ESG Reporting</li>
                             </ul>
                         </div>
@@ -208,11 +233,11 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-blue-50 p-3 rounded-lg">
                                 <h5 class="text-xs font-bold text-blue-800 uppercase mb-1">KPI Focus</h5>
-                                <p class="text-sm text-blue-900 font-medium" id="detail-kpi">TRIR (Global), Leading Indicator Participation, Audit Closure Rate.</p>
+                                <p class="text-sm text-blue-900 font-medium" id="detail-kpi">TRIR (Global)<span class="citation" onclick="scrollToSection('citation-24')">[24]</span>, Leading Indicator Participation, Audit Closure Rate, Sustainability Indices.</p>
                             </div>
                             <div class="bg-amber-50 p-3 rounded-lg">
                                 <h5 class="text-xs font-bold text-amber-800 uppercase mb-1">Typical Roles</h5>
-                                <p class="text-sm text-amber-900 font-medium" id="detail-roles">VP EHS, Global Director of Occ Health, Systems Manager.</p>
+                                <p class="text-sm text-amber-900 font-medium" id="detail-roles">VP EHS, Global Director of Occ Health, Systems Manager, ESG Lead.</p>
                             </div>
                         </div>
                     </div>
@@ -248,24 +273,67 @@
                         </div>
                         <p class="text-xs text-slate-500 mt-2 text-center max-w-sm">
                             <span class="font-semibold text-slate-800">Chart displays relative focus areas (Scale 0-10).</span><br>
-                            0 = Minimal Focus/Competency. 10 = Maximum Focus/Expertise.
-                            The plot shows the difference in priority and skills between Global (Strategy) and Local (Execution) teams.
+                            **0 = Minimal Focus/Competency. 10 = Maximum Focus/Expertise.**
+                            The plot shows the **difference in priority and skills** between Global (Strategy) and Local (Execution) teams.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Reporting Lines Simulator -->
-        <section id="reporting" class="py-16 bg-slate-50">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10">
-                    <h2 class="text-2xl font-bold text-slate-900">Reporting Lines: Functional vs. Matrix</h2>
-                    <p class="text-slate-600 mt-2">Who hires, fires, and reviews the performance of the local H&S Manager? This is the most critical structural decision.</p>
+        <!-- Section 3: Consolidated EHS Models & Reporting Lines -->
+        <section id="models" class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-purple-500 pl-4">EHS Structural Models & Reporting Lines</h2>
+                <p class="text-slate-600 mb-8 max-w-4xl">
+                    Every EHS structure must solve the conflict between maintaining **Control & Consistency** (Centralized) and fostering **Customization & Agility** (Decentralized). The Hybrid/Matrix model (recommended) is the synthesis designed to achieve the best of both worlds.<span class="citation" onclick="scrollToSection('citation-13')">[8]</span>
+                </p>
+
+                <!-- Model Comparison Table -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-12">
+                    <div class="grid md:grid-cols-3 border-b border-slate-200 bg-slate-100">
+                        <h3 class="p-4 font-bold text-slate-700">Structural Model</h3>
+                        <h3 class="p-4 font-bold text-slate-700">Pros (Primary Benefits)</h3>
+                        <h3 class="p-4 font-bold text-slate-700">Cons (Primary Trade-offs)</h3>
+                    </div>
+                    
+                    <!-- Row: Centralized -->
+                    <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                        <div class="p-4 bg-blue-50/50">
+                            <h4 class="font-bold text-blue-800 flex items-center gap-2">⚙️ Centralised (Functional)</h4>
+                            <p class="text-xs text-slate-600 italic">Corporate hub controls policies, expertise, and budgets.</p>
+                        </div>
+                        <div class="p-4 text-sm text-green-700 font-medium">High Compliance Consistency; Broad & Specialized Expertise; High Cost Efficiency.</div>
+                        <div class="p-4 text-sm text-red-700 font-medium">Slower Response Speed (Corporate delays); Culture can feel Uniform but Detached.</div>
+                    </div>
+
+                    <!-- Row: Decentralized -->
+                    <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                        <div class="p-4 bg-emerald-50/50">
+                            <h4 class="font-bold text-emerald-800 flex items-center gap-2">🌱 Decentralised</h4>
+                            <p class="text-xs text-slate-600 italic">Each facility controls protocols, budgets, and operational decisions.</p>
+                        </div>
+                        <div class="p-4 text-sm text-green-700 font-medium">Faster Response Speed; Strong Local Culture/Engagement; Deep Local Knowledge.</div>
+                        <div class="p-4 text-sm text-red-700 font-medium">Potentially Inconsistent Compliance; Variable Resource Allocation; Higher Cost per Unit.</div>
+                    </div>
+
+                    <!-- Row: Hybrid/Matrix -->
+                    <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                        <div class="p-4 bg-purple-50/50">
+                            <h4 class="font-bold text-purple-800 flex items-center gap-2">🤝 Hybrid / Matrix (Recommended)</h4>
+                            <p class="text-xs text-slate-600 italic">Corporate sets standards; Local executes; dual accountability.</p>
+                        </div>
+                        <div class="p-4 text-sm text-green-700 font-medium">Optimal Balance; Dual Accountability; Access to Global Expertise at local level.</div>
+                        <div class="p-4 text-sm text-red-700 font-medium">Requires Leaders to manage competing priorities; Risk of confusion without clear RACI.</div>
+                    </div>
                 </div>
 
+                <!-- Reporting Lines Simulator -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="flex border-b border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 p-4 border-b">Matrix vs. Functional Reporting Simulator</h3>
+                    <p class="text-slate-600 text-sm p-4">The reporting line of the **Local EHS Manager** defines whether your system leans Matrix (hybrid) or Functional (centralized). Select a model to see its primary characteristics.<span class="citation" onclick="scrollToSection('citation-29')">[29]</span></p>
+                    
+                    <div class="flex border-y border-slate-200">
                         <button onclick="setReporting('matrix')" id="btn-matrix" class="flex-1 py-4 text-center font-bold text-sm bg-blue-50 text-blue-700 border-b-2 border-blue-600 transition-colors">Matrix Reporting (Hybrid)</button>
                         <button onclick="setReporting('functional')" id="btn-functional" class="flex-1 py-4 text-center font-bold text-sm text-slate-500 hover:bg-slate-50 transition-colors">Functional Reporting (Centralized)</button>
                     </div>
@@ -305,11 +373,11 @@
         <!-- Section 4: RACI Explorer -->
         <section id="raci" class="py-16 bg-white border-t border-slate-200">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-amber-500 pl-4">Responsibility Assignment (RACI) Matrix</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-amber-500 pl-4">Responsibility Assignment (RACI) Matrix<span class="citation" onclick="scrollToSection('citation-9')">[9]</span></h2>
                 <div class="flex flex-col lg:flex-row gap-8 mb-6">
                     <div class="lg:w-2/3">
                         <p class="text-slate-600 mb-4">
-                            The RACI model clarifies who is Responsible, Accountable, Consulted, and Informed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
+                            The RACI model clarifies who is **R**esponsible, **A**ccountable, **C**onsulted, and **I**nformed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
                         </p>
                         <p class="text-sm font-semibold text-slate-700">Filter tasks by category below:</p>
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -350,13 +418,163 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Section 5: Behavioral Change Priorities -->
+        <section id="behavior" class="py-16 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-600 pl-4">Driving Behavioral Change & Leadership</h2>
+                <p class="text-slate-600 mb-8 max-w-4xl">
+                    Sustaining a high-performance EHS structure requires continuous investment in leadership commitment, process efficiency, and cutting-edge training methodologies to embed safety at every level of the organization.<span class="citation" onclick="scrollToSection('citation-4')">[4]</span>
+                </p>
+
+                <div class="p-8 bg-white rounded-xl shadow-lg border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Safety Improvement Priorities: Process, Systems, and Leadership</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        We need to launch a comprehensive review of our current H&S processes and ways of working. A key priority within this review is determining the usability of our hazard reporting systems and confirming employee awareness of our EHS software, Quentic.
+                    </p>
+                    <p class="text-slate-700 leading-relaxed mt-4">
+                        Furthermore, we must ensure our leaders are fully equipped. This requires dedicated training in coaching and continuous learning techniques. Leaders should actively engage with everyone and focus on developing real-world operational scenarios that we can incorporate into advanced training methods, such as VR simulation training.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: The Strategic Imperative & Business Case (Page 2 & 11 content + Uploaded Images) -->
+        <section id="business-case" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-red-500 pl-4">The Strategic Imperative: EHS Structure is a Performance Driver</h2>
+                
+                <div class="grid lg:grid-cols-3 gap-8">
+                    
+                    <div class="lg:col-span-1 p-6 bg-red-50 rounded-xl shadow-md border border-red-100">
+                        <h3 class="text-xl font-bold text-red-800 mb-4">Cost of Misalignment (Reactive)</h3>
+                        <p class="text-red-900 font-semibold mb-3">An unhealthy or misaligned EHS structure creates significant, measurable costs:</p>
+                        <ul class="space-y-2 text-sm text-red-900">
+                            <li class="flex items-center gap-2">🔥 **£3.5 Billion:** Annual cost to employers from stress-related absences.</li>
+                            <li class="flex items-center gap-2">🔄 **40%:** Contribution of workplace stress to employee turnover costs.</li>
+                            <li class="flex items-center gap-2">⚠️ **60%:** Contribution of workplace stress to accidents.</li>
+                        </ul>
+                        <p class="text-xs text-red-700 italic mt-4">"Without clear accountability and communication, safety risks go unnoticed..."</p>
+                    </div>
+
+                    <div class="lg:col-span-2 grid md:grid-cols-2 gap-6">
+                        
+                        <!-- ROI - Using uploaded image 1 -->
+                        <div class="p-5 bg-green-50 rounded-xl shadow-sm border border-green-100 flex flex-col items-center">
+                            <img src="image_0b3bbc.png" alt="Visual representation of financial return on investment in EHS" class="h-20 w-auto mb-3 rounded-md object-cover" onerror="this.onerror=null; this.src='https://placehold.co/120x80/16a34a/ffffff?text=ROI+Visual'">
+                            <h4 class="font-bold text-green-800 mb-2">Return on Investment (ROI)<span class="citation" onclick="scrollToSection('citation-23')">[23]</span></h4>
+                            <p class="text-2xl font-extrabold text-green-900 mb-3">£1.64 to £6.15 Saved</p>
+                            <p class="text-sm text-green-700 text-center">For every £1 spent on comprehensive workplace health, companies saved between **£1.64 and £6.15**.</p>
+                        </div>
+                        
+                        <!-- Stakeholder Value - Using uploaded image 2 -->
+                        <div class="p-5 bg-green-50 rounded-xl shadow-sm border border-green-100 flex flex-col items-center">
+                            <img src="image_0b3513.png" alt="Visual representing human capital and investor valuation" class="h-20 w-auto mb-3 rounded-md object-cover" onerror="this.onerror=null; this.src='https://placehold.co/120x80/16a34a/ffffff?text=Value+Visual'">
+                            <h4 class="font-bold text-green-800 mb-2">Stakeholder Value & Profile<span class="citation" onclick="scrollToSection('citation-3')">[3]</span></h4>
+                            <p class="text-2xl font-extrabold text-green-900 mb-3">35% of Valuation</p>
+                            <p class="text-sm text-green-700 text-center">35% of an investor's valuation decision is based on non-financial factors like **human capital**.</p>
+                        </div>
+                        
+                        <div class="md:col-span-2 p-4 bg-slate-50 rounded-lg">
+                            <h4 class="font-bold text-slate-800 mb-2 text-sm">How the Savings are Realised:</h4>
+                            <ul class="text-xs text-slate-600 grid grid-cols-2 gap-2">
+                                <li class="flex items-center gap-1">💰 Reduced Direct Costs</li>
+                                <li class="flex items-center gap-1">🚀 Increased Productivity</li>
+                                <li class="flex items-center gap-1">⚖️ Reduced Legal Risk</li>
+                                <li class="flex items-center gap-1">🌟 Stronger Organizational Profile</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Action Plan (Page 12 content, now with icons) -->
+        <section id="action-plan" class="py-16 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-amber-600 pl-4">Your Action Plan: Four Steps to Building a High-Performance EHS Structure<span class="citation" onclick="scrollToSection('citation-10')">[10]</span></h2>
+                <p class="text-slate-600 mb-10 max-w-4xl">
+                    The right structure empowers your EHS team with the authority, resources, and backing to create a safer, more productive workplace for everyone. Use these four steps to guide your implementation.
+                </p>
+
+                <div class="grid md:grid-cols-4 gap-6">
+                    
+                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                        <span class="text-4xl text-amber-600 mb-3">🔍</span>
+                        <h3 class="font-bold text-slate-800 mb-1">1. Evaluate Your Needs</h3>
+                        <p class="text-sm text-slate-600">Use the 'Fit-for-Purpose Framework' to assess your organisation's size, risk profile, geography, and culture.</p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                        <span class="text-4xl text-amber-600 mb-3">🏗️</span>
+                        <h3 class="font-bold text-slate-800 mb-1">2. Design & Implement Gradually</h3>
+                        <p class="text-sm text-slate-600">Choose the optimal model (Hybrid recommended). Roll out changes in phases and pilot the new structure at select locations.</p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                        <span class="text-4xl text-amber-600 mb-3">🎯</span>
+                        <h3 class="font-bold text-slate-800 mb-1">3. Hire & Develop the Right Talent</h3>
+                        <p class="text-sm text-slate-600">Align recruitment with your structure, ensuring the right mix of central strategists and local, hands-on experts.</p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                        <span class="text-4xl text-amber-600 mb-3">🔄</span>
+                        <h3 class="font-bold text-slate-800 mb-1">4. Adapt & Evolve</h3>
+                        <p class="text-sm text-slate-600">Regularly measure performance using leading indicators and review the structure to ensure it meets evolving business goals.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sources Section -->
+        <section id="sources" class="py-12 bg-slate-800 border-t border-slate-700">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-xl font-bold text-slate-100 mb-6 border-l-4 border-slate-500 pl-4">Sources</h2>
+                <ol class="text-sm text-slate-300 list-decimal list-inside space-y-2">
+                    <li id="citation-1">Corporate Health and Safety Protocols: A Conceptual Model for Ensuring Sustainability in Global Operations - IRE Journals, accessed on December 15, 2025, https://www.irejournals.com/formatedpaper/1704115.pdf</li>
+                    <li id="citation-2">Health and Safety Governance – Quick Guide - The Institute of Directors New Zealand, accessed on December 15, 2025, https://www.iod.org.nz/assets/Resources-insights/Guides-and-templates/Health-and-Safety-Governance-QuickGuide.IoD2024.pdf</li>
+                    <li id="citation-3">Health & Safety Organisational Structure - Facility Management, accessed on December 15, 2025, https://deutsche-boerse.com/resource/blob/3648752/76b82641a2633ed5e13e33b44cb3e212/data/DBG_Health-Safety_Management_Structure%20Manual_public.pdf</li>
+                    <li id="citation-4">Seven Actions to Integrate Employees' Health and Safety | UL Solutions, accessed on December 15, 2025, https://www.ul.com/news/seven-actions-integrate-employees-health-and-safety</li>
+                    <li id="citation-5">Managing Health and Safety in Multisite Operations - Arch Insurance, accessed on December 15, 2025, https://insurance.archgroup.com/managing-health-safety-in-multi-site-operations/</li>
+                    <li id="citation-6">How to Structure EHS Reporting Lines for Maximum Impact – Employers blog, accessed on December 15, 2025, https://ehscareers.com/employer-blog/how-to-structure-ehs-reporting-lines-for-maximum-impact/</li>
+                    <li id="citation-7">Transforming EHS Management in High-Risk Industries, accessed on December 15, 2025, https://136847.fs1.hubspotusercontent-na1.net/hubfs/136847/Research%20Reports/Report%20PDFs/LNS%20Research%20Spotlight%2C%20EHS%204.0%20Transforming%20EHS%20Management%20in%20High%20Risk%20Industries.pdf</li>
+                    <li id="citation-8">Centralized vs. Decentralized EHS Teams: What Works Best ..., accessed on December 15, 2025, https://ehscareers.com/employer-blog/centralized-vs-decentralized-ehs-teams-what-works-best/</li>
+                    <li id="citation-9">Types of Organizational Structures - Coursera, accessed on December 15, 2025, https://www.coursera.org/articles/types-of-organizational-structures</li>
+                    <li id="citation-10">Global Health and Safety Policy - 2023 - Page Group, accessed on December 15, 2025, https://www.page.com/sites/page-group-v3/files/2023-10/global-health-and-safety-policy-2023.pdf</li>
+                    <li id="citation-11">Organisation Structure and Reporting Lines - Grow Like Tree, accessed on December 15, 2025, https://www.growliketree.com/2025/05/Organisation-structure-hse-reporting-lines-communication-continual-improvement.html</li>
+                    <li id="citation-12">Accessed on December 15, 2025, https://www.ziprecruiter.com/e/What-Does-a-Regional-EHS-Manager-Do#:~:text=As%20a%20regional%20EHS%20manager,and%20due%20diligence%20of%20regulations.</li>
+                    <li id="citation-13">Regional Health and Safety Coordinator LATAM @ Segment - Accel Job Board, accessed on December 15, 2025, https://jobs.accel.com/companies/segment/jobs/62169992-regional-health-and-safety-coordinator-latam</li>
+                    <li id="citation-14">Health and Safety Policy WEB - TLScontact, accessed on December 15, 2025, https://static.tlscontact.com/media/health_and_safety_policy-en.pdf</li>
+                    <li id="citation-15">Health and Safety Laws in Different Countries, accessed on December 15, 2025, https://www.internationalsafetyconsultants.com/health-and-safety-laws-in-different-countries/</li>
+                    <li id="citation-16">Matrix organisational structure | nibusinessinfo.co.uk, accessed on December 15, 2025, https://www.nibusinessinfo.co.uk/content/matrix-organisational-structure</li>
+                    <li id="citation-17">Regulatory Registers: Navigating the Complexities of Global EHS Compliance | Inogen, accessed on December 15, 2025, https://www.inogenalliance.com/blog-post/regulatory-registers-navigating-complexities-global-ehs-compliance</li>
+                    <li id="citation-18">How to Hire Global EHS Manager: 2025 Guide – Employers blog, accessed on December 15, 2025, https://ehscareers.com/employer-blog/how-to-hire-global-ehs-manager-guide/</li>
+                    <li id="citation-19">Developing a global occupational health and safety management system model for Japanese companies - PMC - NIH, accessed on December 15, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC6970394/</li>
+                    <li id="citation-20">What Does a Regional EHS Manager Do? - ZipRecruiter, accessed on December 15, 2025, https://www.ziprecruiter.com/e/What-Does-a-Regional-EHS-Manager-Do</li>
+                    <li id="citation-21">Regional Ehs Manager: What Is It? and How to Become One? - ZipRecruiter, accessed on December 15, 2025, https://www.ziprecruiter.com/career/Regional-Ehs-Manager/What-Is-How-to-Become</li>
+                    <li id="citation-22">Senior Regional EHS Manager, WHS- Reverse Logisitics - Job ID: 3140302 | Amazon.jobs, accessed on December 15, 2025, https://amazon.jobs/en/jobs/3140302/senior-regional-ehs-manager-whs-reverse-logisitics</li>
+                    <li id="citation-23">Measuring best practices for workplace safety, health and wellbeing - PubMed Central - NIH, accessed on December 15, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC5943154/</li>
+                    <li id="citation-24">18 Health And Safety KPIs To Track In 2025 (+ Template) - Cascade Strategy, accessed on December 15, 2025, https://www.cascade.app/blog/kpis-health-and-safety</li>
+                    <li id="citation-25">How to Set up Effective Health and Safety Committees | EcoOnline, accessed on December 15, 2025, https://www.ecoonline.com/blog/how-to-set-up-effective-health-and-safety-committees/</li>
+                    <li id="citation-26">Performance Indicators (KPIs) and Metrics for Health and Safety - Astutis, accessed on December 15, 2025, https://www.astutis.com/astutis-hub/blog/kpi-metrics-health-safety</li>
+                    <li id="citation-27">Accessed on December 15, 2025, https://www.profit.co/blog/performance-management/what-is-dotted-line-reporting-and-why-does-it-matter/#:~:text=The%20primary%20or%20solid%20line,working%20in%20a%20different%20department.</li>
+                    <li id="citation-28">Dotted-Line Reporting: What It Is and How to Use It Effectively - Engagedly, accessed on December 15, 2025, https://engagedly.com/blog/what-is-dotted-line-reporting-in-organizations/</li>
+                    <li id="citation-29">What Is Dotted Line Reporting? - Organimi, accessed on December 15, 2025, https://www.organimi.com/what-is-dotted-line-reporting/</li>
+                    <li id="citation-30">Navigating International Safety Regulations for Global Businesses - ThinkGlobal HR, accessed on December 15, 2025, https://www.thinkglobal-hr.com/article/navigating-international-safety-regulations-for-global-businesses</li>
+                    <li id="citation-31">Country Risk Assessment Process for SA8000 - SAI - Social Accountability International, accessed on December 15, 2025, https://sa-intl.org/resources/country-risk-assessment-process-for-sa8000/</li>
+                    <li id="citation-32">Integrating Compliance Software With Health & Safety Management Systems - Skillcast, accessed on December 15, 2025, https://www.skillcast.com/blog/how-to-select-compliance-software-integrates-with-health-safety-management-systems</li>
+                    <li id="citation-33">Safetip #23: Steps to Forming a Workplace Safety Committee | Wolters Kluwer, accessed on December 15, 2025, https://www.wolterskluwer.com/en/expert-insights/safetip-23-steps-to-forming-a-workplace-safety-committee</li>
+                    <li id="citation-34">global healthy company management model | mapfre, accessed on December 15, 2025, https://www.mapfre.com/media/global-healthy-company-management-model.pdf</li>
+                </ol>
+            </div>
+        </section>
 
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-12">
+    <footer class="bg-slate-900 text-slate-400 py-6">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="mb-4 text-slate-100 font-bold">Global H&S Design Guide</p>
-            <p class="text-xs">Based on ISO 45001 Organizational Roles, Responsibilities and Authorities guidelines.</p>
+            <p class="text-xs">All information is compiled from "The Architecture of Advantage" report and external cited sources.</p>
         </div>
     </footer>
 
@@ -403,8 +621,8 @@
                 purpose: 'To translate global strategy into regional action, focusing on European and related regulatory alignment, ensuring compliance with EU Directives and country-specific legislation.',
                 responsibilities: [
                     '• Interpreting EU Directives/Country Legislation vs. Global Standards',
-                    '• Coordinating Regional Audits, especially those related to EU regulations',
-                    '• Mentoring Site H&S Managers across European sites',
+                    '• Coordinating Regional Audits',
+                    '• Mentoring Site H&S Managers',
                     '• Facilitating Cross-Site Best Practice Sharing in the region',
                     '• Aggregating Regional Data for EMEA'
                 ],
