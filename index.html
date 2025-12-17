@@ -10,7 +10,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         
-        /* Custom scrollbar for better aesthetics */
+        / Custom scrollbar for better aesthetics /
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -29,7 +29,7 @@
             .chart-container { height: 350px; }
         }
 
-        /* Organizational Chart Connector Lines */
+        / Organizational Chart Connector Lines /
         .org-connector-vertical {
             width: 2px;
             background-color: #cbd5e1;
@@ -60,10 +60,11 @@
          3. Competency Balance (Talent Focus).
          4. EHS Structural Models & Reporting Lines (CONSOLIDATED SECTION).
          5. RACI Matrix Explorer (Accountability).
-         6. Driving Behavioral Change (Leadership/Culture focus).
-         7. Business Case & Costs (Page 2, 11).
-         8. Action Plan (Page 12).
-         9. Sources (All external and internal sources listed and linked via citations). -->
+         6. Business Case & Costs (Page 2, 11).
+         7. Action Plan (Page 12).
+         8. Behavioral Feedback (Incorporating user's EU/MEA HR Meeting points - NEW POSITION).
+         9. Sources (All external and internal sources listed and linked via citations). 
+         Note: The Chart.js visualization is confirmed working in Section 2. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col">
@@ -97,7 +98,7 @@
             <div class="max-w-6xl mx-auto px-4 text-center">
                 <h1 class="text-4xl font-extrabold text-slate-900 mb-4">The Architecture of Advantage</h1>
                 <p class="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                    Designing your EHS structure for **Peak Performance** is a strategic imperative, transforming EHS from a cost center to a performance driver.
+                    Designing EHS structure for Peak Performance is a strategic imperative, transforming EHS from a cost center to a performance driver.
                 </p>
 
                 <div class="grid md:grid-cols-4 gap-6 mt-10 text-center max-w-5xl mx-auto">
@@ -131,7 +132,7 @@
             <div class="mb-10">
                 <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-500 pl-4">The Tiered Organization Model (Hybrid/Matrix)</h2>
                 <p class="text-slate-600 max-w-3xl">
-                    Most successful global firms utilize a 3-tier structure to balance global governance (Tier 1) with localized execution (Tier 3). This synthesis is achieved through the **Matrix Structure** which ensures dual accountability.<span class="citation" onclick="scrollToSection('citation-16')">[16]</span> <br><span class="font-semibold text-sm text-blue-600 mt-2 block">Instruction: Click on the boxes in the diagram below to reveal detailed responsibilities and KPIs for each level.</span>
+                    Most successful global firms utilize a 3-tier structure to balance global governance (Tier 1) with localized execution (Tier 3). This synthesis is achieved through the Matrix Structure which ensures dual accountability.<span class="citation" onclick="scrollToSection('citation-16')">[16]</span> <br><span class="font-semibold text-sm text-blue-600 mt-2 block">Instruction: Click on the boxes in the diagram below to reveal detailed responsibilities and KPIs for each level.</span>
                 </p>
             </div>
 
@@ -273,8 +274,8 @@
                         </div>
                         <p class="text-xs text-slate-500 mt-2 text-center max-w-sm">
                             <span class="font-semibold text-slate-800">Chart displays relative focus areas (Scale 0-10).</span><br>
-                            **0 = Minimal Focus/Competency. 10 = Maximum Focus/Expertise.**
-                            The plot shows the **difference in priority and skills** between Global (Strategy) and Local (Execution) teams.
+                            0 = Minimal Focus/Competency. 10 = Maximum Focus/Expertise.
+                            The plot shows the difference in priority and skills between Global (Strategy) and Local (Execution) teams.
                         </p>
                     </div>
                 </div>
@@ -286,7 +287,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-purple-500 pl-4">EHS Structural Models & Reporting Lines</h2>
                 <p class="text-slate-600 mb-8 max-w-4xl">
-                    Every EHS structure must solve the conflict between maintaining **Control & Consistency** (Centralized) and fostering **Customization & Agility** (Decentralized). The Hybrid/Matrix model (recommended) is the synthesis designed to achieve the best of both worlds.<span class="citation" onclick="scrollToSection('citation-13')">[8]</span>
+                    Every EHS structure must solve the conflict between maintaining Control & Consistency (Centralized) and fostering Customization & Agility (Decentralized). The Hybrid/Matrix model (recommended) is the synthesis designed to achieve the best of both worlds.<span class="citation" onclick="scrollToSection('citation-8')">[8]</span>
                 </p>
 
                 <!-- Model Comparison Table -->
@@ -331,7 +332,7 @@
                 <!-- Reporting Lines Simulator -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
                     <h3 class="text-xl font-bold text-slate-800 p-4 border-b">Matrix vs. Functional Reporting Simulator</h3>
-                    <p class="text-slate-600 text-sm p-4">The reporting line of the **Local EHS Manager** defines whether your system leans Matrix (hybrid) or Functional (centralized). Select a model to see its primary characteristics.<span class="citation" onclick="scrollToSection('citation-29')">[29]</span></p>
+                    <p class="text-slate-600 text-sm p-4">The reporting line of the Local EHS Manager defines whether your system leans Matrix (hybrid) or Functional (centralized). Select a model to see its primary characteristics.<span class="citation" onclick="scrollToSection('citation-29')">[29]</span></p>
                     
                     <div class="flex border-y border-slate-200">
                         <button onclick="setReporting('matrix')" id="btn-matrix" class="flex-1 py-4 text-center font-bold text-sm bg-blue-50 text-blue-700 border-b-2 border-blue-600 transition-colors">Matrix Reporting (Hybrid)</button>
@@ -377,7 +378,7 @@
                 <div class="flex flex-col lg:flex-row gap-8 mb-6">
                     <div class="lg:w-2/3">
                         <p class="text-slate-600 mb-4">
-                            The RACI model clarifies who is **R**esponsible, **A**ccountable, **C**onsulted, and **I**nformed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
+                            The RACI model clarifies who is Responsible, Accountable, Consulted, and Informed for key H&S processes. This delineation prevents "Shadow Safety" teams and ensures no critical task falls through the gap.
                         </p>
                         <p class="text-sm font-semibold text-slate-700">Filter tasks by category below:</p>
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -419,28 +420,8 @@
             </div>
         </section>
         
-        <!-- Section 5: Behavioral Change Priorities -->
-        <section id="behavior" class="py-16 bg-slate-50 border-t border-slate-200">
-            <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-600 pl-4">Driving Behavioral Change & Leadership</h2>
-                <p class="text-slate-600 mb-8 max-w-4xl">
-                    Sustaining a high-performance EHS structure requires continuous investment in leadership commitment, process efficiency, and cutting-edge training methodologies to embed safety at every level of the organization.<span class="citation" onclick="scrollToSection('citation-4')">[4]</span>
-                </p>
-
-                <div class="p-8 bg-white rounded-xl shadow-lg border border-slate-200">
-                    <h3 class="text-xl font-bold text-slate-800 mb-4">Safety Improvement Priorities: Process, Systems, and Leadership</h3>
-                    <p class="text-slate-700 leading-relaxed">
-                        We need to launch a comprehensive review of our current H&S processes and ways of working. A key priority within this review is determining the usability of our hazard reporting systems and confirming employee awareness of our EHS software, Quentic.
-                    </p>
-                    <p class="text-slate-700 leading-relaxed mt-4">
-                        Furthermore, we must ensure our leaders are fully equipped. This requires dedicated training in coaching and continuous learning techniques. Leaders should actively engage with everyone and focus on developing real-world operational scenarios that we can incorporate into advanced training methods, such as VR simulation training.
-                    </p>
-                </div>
-            </div>
-        </section>
-
         <!-- Section 6: The Strategic Imperative & Business Case (Page 2 & 11 content + Uploaded Images) -->
-        <section id="business-case" class="py-16 bg-white border-t border-slate-200">
+        <section id="business-case" class="py-16 bg-slate-50 border-t border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-red-500 pl-4">The Strategic Imperative: EHS Structure is a Performance Driver</h2>
                 
@@ -450,9 +431,9 @@
                         <h3 class="text-xl font-bold text-red-800 mb-4">Cost of Misalignment (Reactive)</h3>
                         <p class="text-red-900 font-semibold mb-3">An unhealthy or misaligned EHS structure creates significant, measurable costs:</p>
                         <ul class="space-y-2 text-sm text-red-900">
-                            <li class="flex items-center gap-2">🔥 **£3.5 Billion:** Annual cost to employers from stress-related absences.</li>
-                            <li class="flex items-center gap-2">🔄 **40%:** Contribution of workplace stress to employee turnover costs.</li>
-                            <li class="flex items-center gap-2">⚠️ **60%:** Contribution of workplace stress to accidents.</li>
+                            <li class="flex items-center gap-2">🔥 £3.5 Billion: Annual cost to employers from stress-related absences.</li>
+                            <li class="flex items-center gap-2">🔄 40%: Contribution of workplace stress to employee turnover costs.</li>
+                            <li class="flex items-center gap-2">⚠️ 60%: Contribution of workplace stress to accidents.</li>
                         </ul>
                         <p class="text-xs text-red-700 italic mt-4">"Without clear accountability and communication, safety risks go unnoticed..."</p>
                     </div>
@@ -464,7 +445,7 @@
                             <img src="image_0b3bbc.png" alt="Visual representation of financial return on investment in EHS" class="h-20 w-auto mb-3 rounded-md object-cover" onerror="this.onerror=null; this.src='https://placehold.co/120x80/16a34a/ffffff?text=ROI+Visual'">
                             <h4 class="font-bold text-green-800 mb-2">Return on Investment (ROI)<span class="citation" onclick="scrollToSection('citation-23')">[23]</span></h4>
                             <p class="text-2xl font-extrabold text-green-900 mb-3">£1.64 to £6.15 Saved</p>
-                            <p class="text-sm text-green-700 text-center">For every £1 spent on comprehensive workplace health, companies saved between **£1.64 and £6.15**.</p>
+                            <p class="text-sm text-green-700 text-center">For every £1 spent on comprehensive workplace health, companies saved between £1.64 and £6.15.</p>
                         </div>
                         
                         <!-- Stakeholder Value - Using uploaded image 2 -->
@@ -472,7 +453,7 @@
                             <img src="image_0b3513.png" alt="Visual representing human capital and investor valuation" class="h-20 w-auto mb-3 rounded-md object-cover" onerror="this.onerror=null; this.src='https://placehold.co/120x80/16a34a/ffffff?text=Value+Visual'">
                             <h4 class="font-bold text-green-800 mb-2">Stakeholder Value & Profile<span class="citation" onclick="scrollToSection('citation-3')">[3]</span></h4>
                             <p class="text-2xl font-extrabold text-green-900 mb-3">35% of Valuation</p>
-                            <p class="text-sm text-green-700 text-center">35% of an investor's valuation decision is based on non-financial factors like **human capital**.</p>
+                            <p class="text-sm text-green-700 text-center">35% of an investor's valuation decision is based on non-financial factors like human capital.</p>
                         </div>
                         
                         <div class="md:col-span-2 p-4 bg-slate-50 rounded-lg">
@@ -490,34 +471,34 @@
         </section>
 
         <!-- Section 7: Action Plan (Page 12 content, now with icons) -->
-        <section id="action-plan" class="py-16 bg-slate-50 border-t border-slate-200">
+        <section id="action-plan" class="py-16 bg-white border-t border-slate-200">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-amber-600 pl-4">Your Action Plan: Four Steps to Building a High-Performance EHS Structure<span class="citation" onclick="scrollToSection('citation-10')">[10]</span></h2>
+                <h2 class="text-2xl font-bold text-slate-900 mb-8 border-l-4 border-amber-600 pl-4">Your Action Plan: Four Steps to Building a High-Performance EHS Structure</h2>
                 <p class="text-slate-600 mb-10 max-w-4xl">
                     The right structure empowers your EHS team with the authority, resources, and backing to create a safer, more productive workplace for everyone. Use these four steps to guide your implementation.
                 </p>
 
                 <div class="grid md:grid-cols-4 gap-6">
                     
-                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
                         <span class="text-4xl text-amber-600 mb-3">🔍</span>
                         <h3 class="font-bold text-slate-800 mb-1">1. Evaluate Your Needs</h3>
                         <p class="text-sm text-slate-600">Use the 'Fit-for-Purpose Framework' to assess your organisation's size, risk profile, geography, and culture.</p>
                     </div>
 
-                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
                         <span class="text-4xl text-amber-600 mb-3">🏗️</span>
                         <h3 class="font-bold text-slate-800 mb-1">2. Design & Implement Gradually</h3>
                         <p class="text-sm text-slate-600">Choose the optimal model (Hybrid recommended). Roll out changes in phases and pilot the new structure at select locations.</p>
                     </div>
 
-                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
                         <span class="text-4xl text-amber-600 mb-3">🎯</span>
                         <h3 class="font-bold text-slate-800 mb-1">3. Hire & Develop the Right Talent</h3>
                         <p class="text-sm text-slate-600">Align recruitment with your structure, ensuring the right mix of central strategists and local, hands-on experts.</p>
                     </div>
 
-                    <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
+                    <div class="p-6 bg-slate-50 rounded-xl border border-slate-200 shadow-md flex flex-col items-center text-center">
                         <span class="text-4xl text-amber-600 mb-3">🔄</span>
                         <h3 class="font-bold text-slate-800 mb-1">4. Adapt & Evolve</h3>
                         <p class="text-sm text-slate-600">Regularly measure performance using leading indicators and review the structure to ensure it meets evolving business goals.</p>
@@ -527,14 +508,64 @@
             </div>
         </section>
 
-        <!-- Sources Section -->
-        <section id="sources" class="py-12 bg-slate-800 border-t border-slate-700">
+        <!-- Section 8: Behavioral Change Priorities (Feedback moved here) -->
+        <section id="behavior" class="py-16 bg-slate-50 border-t border-slate-200">
             <div class="max-w-6xl mx-auto px-4">
-                <h2 class="text-xl font-bold text-slate-100 mb-6 border-l-4 border-slate-500 pl-4">Sources</h2>
-                <ol class="text-sm text-slate-300 list-decimal list-inside space-y-2">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4 border-l-4 border-blue-600 pl-4">Feedback From HR EU + MEA December 2025 Meeting</h2>
+                <p class="text-slate-600 mb-8 max-w-4xl">
+                    Topic: How can we drive Safe Behaviours in our workplace?
+                    The following points highlight necessary interventions across psychological safety, leadership accountability, training, and systemic support.<span class="citation" onclick="scrollToSection('citation-35')">[35]</span>
+                </p>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-md border border-blue-100">
+                        <h3 class="text-xl font-bold text-blue-800 mb-3 flex items-center gap-2">1. The Psychosocial Dimension (Mental Health = Safety)</h3>
+                        <ul class="text-sm text-slate-600 space-y-3 list-disc ml-4">
+                            <li>Broaden the Definition of "Injury": Move beyond Lost Time Injuries (LTI) caused by accidents. We must account for long-term sick leave due to stress, which is often a precursor to physical lapses in safety.</li>
+                            <li>The "Early Support Model" (Finland Example): Adopt a proactive intervention strategy. Supporting employees at the first signs of stress or illness prevents the exhaustion that leads to accidents.<span class="citation" onclick="scrollToSection('citation-36')">[36]</span></li>
+                            <li>Addressing Time Pressure: Investigate "pressure to fix" as a root cause. High time pressure creates a cognitive load that causes employees to bypass safety protocols.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-md border border-blue-100">
+                        <h3 class="text-xl font-bold text-blue-800 mb-3 flex items-center gap-2">2. Leadership & Accountability (The "Top-Down" Mirror)</h3>
+                        <ul class="text-sm text-slate-600 space-y-3 list-disc ml-4">
+                            <li>Operational Blindness: Managers must conduct weekly "Safety Walks" and "Safety Talks" to see the workplace with fresh eyes.</li>
+                            <li>Safety as a Meeting Opener: Standardize the "Safety Moment" at the start of every meeting (e.g., discussing the commute to work or a recent near-miss).</li>
+                            <li>Leading by Example: Managers must model behavior in common areas, storage rooms, and offices—not just on the shop floor. This includes maintaining "Order and Cleanliness" as a fundamental safety habit.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl shadow-md border border-blue-100">
+                        <h3 class="text-xl font-bold text-blue-800 mb-3 flex items-center gap-2">3. Behavioral Reinforcement & Learning (The "Habit" Loop)</h3>
+                        <ul class="text-sm text-slate-600 space-y-3 list-disc ml-4">
+                            <li>Scenario-Based Learning: Replace generic slides with real-life role plays and VR simulations. Experiencing the consequences of an unsafe act in a safe environment creates a stronger "somatic marker" (emotional memory).</li>
+                            <li>No-Blame Reporting: Use tools like Quentic to encourage "Psychological Safety." Employees must feel safe to report near-misses without fear of punishment.</li>
+                            <li>Public Recognition: Transition from "policing" to "praising." Publicly recognize and reward safe behaviors to reinforce them as the social norm.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl shadow-md border border-blue-100">
+                        <h3 class="text-xl font-bold text-blue-800 mb-3 flex items-center gap-2">4. Systemic Support & Governance (The "Infrastructure")</h3>
+                        <ul class="text-sm text-slate-600 space-y-3 list-disc ml-4">
+                            <li>Standardized Local Roles: Audit the H&S responsible roles in each country to ensure consistency in resources, authority, and time allocation.</li>
+                            <li>Resource Allocation: Ensure the "Service Team" has the actual tools, equipment, and personnel needed to work safely. Safety-first is impossible if the team is under-resourced.</li>
+                            <li>Bottom-Up Feedback Loop: Regularly ask: "We have the tools and training—what is still missing?" Use these insights to review and simplify work instructions.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sources Section -->
+        <section id="sources" class="py-12 bg-white border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-xl font-bold text-slate-900 mb-6 border-l-4 border-slate-500 pl-4">Sources</h2>
+                <ol class="text-sm text-slate-700 list-decimal list-inside space-y-2">
                     <li id="citation-1">Corporate Health and Safety Protocols: A Conceptual Model for Ensuring Sustainability in Global Operations - IRE Journals, accessed on December 15, 2025, https://www.irejournals.com/formatedpaper/1704115.pdf</li>
                     <li id="citation-2">Health and Safety Governance – Quick Guide - The Institute of Directors New Zealand, accessed on December 15, 2025, https://www.iod.org.nz/assets/Resources-insights/Guides-and-templates/Health-and-Safety-Governance-QuickGuide.IoD2024.pdf</li>
-                    <li id="citation-3">Health & Safety Organisational Structure - Facility Management, accessed on December 15, 2025, https://deutsche-boerse.com/resource/blob/3648752/76b82641a2633ed5e13e33b44cb3e212/data/DBG_Health-Safety_Management_Structure%20Manual_public.pdf</li>
+                    <li id="citation-3">The Business Case for a Healthy Workplace - UMass Lowell, by J Burton, 2007, https://www.uml.edu/docs/fd_business_case_healthy_workplace_tcm18-42671.pdf</li>
                     <li id="citation-4">Seven Actions to Integrate Employees' Health and Safety | UL Solutions, accessed on December 15, 2025, https://www.ul.com/news/seven-actions-integrate-employees-health-and-safety</li>
                     <li id="citation-5">Managing Health and Safety in Multisite Operations - Arch Insurance, accessed on December 15, 2025, https://insurance.archgroup.com/managing-health-safety-in-multi-site-operations/</li>
                     <li id="citation-6">How to Structure EHS Reporting Lines for Maximum Impact – Employers blog, accessed on December 15, 2025, https://ehscareers.com/employer-blog/how-to-structure-ehs-reporting-lines-for-maximum-impact/</li>
@@ -554,7 +585,7 @@
                     <li id="citation-20">What Does a Regional EHS Manager Do? - ZipRecruiter, accessed on December 15, 2025, https://www.ziprecruiter.com/e/What-Does-a-Regional-EHS-Manager-Do</li>
                     <li id="citation-21">Regional Ehs Manager: What Is It? and How to Become One? - ZipRecruiter, accessed on December 15, 2025, https://www.ziprecruiter.com/career/Regional-Ehs-Manager/What-Is-How-to-Become</li>
                     <li id="citation-22">Senior Regional EHS Manager, WHS- Reverse Logisitics - Job ID: 3140302 | Amazon.jobs, accessed on December 15, 2025, https://amazon.jobs/en/jobs/3140302/senior-regional-ehs-manager-whs-reverse-logisitics</li>
-                    <li id="citation-23">Measuring best practices for workplace safety, health and wellbeing - PubMed Central - NIH, accessed on December 15, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC5943154/</li>
+                    <li id="citation-23">The Business Case for a Healthy Workplace - UMass Lowell, by J Burton, 2007, https://www.uml.edu/docs/fd_business_case_healthy_workplace_tcm18-42671.pdf</li>
                     <li id="citation-24">18 Health And Safety KPIs To Track In 2025 (+ Template) - Cascade Strategy, accessed on December 15, 2025, https://www.cascade.app/blog/kpis-health-and-safety</li>
                     <li id="citation-25">How to Set up Effective Health and Safety Committees | EcoOnline, accessed on December 15, 2025, https://www.ecoonline.com/blog/how-to-set-up-effective-health-and-safety-committees/</li>
                     <li id="citation-26">Performance Indicators (KPIs) and Metrics for Health and Safety - Astutis, accessed on December 15, 2025, https://www.astutis.com/astutis-hub/blog/kpi-metrics-health-safety</li>
@@ -565,7 +596,9 @@
                     <li id="citation-31">Country Risk Assessment Process for SA8000 - SAI - Social Accountability International, accessed on December 15, 2025, https://sa-intl.org/resources/country-risk-assessment-process-for-sa8000/</li>
                     <li id="citation-32">Integrating Compliance Software With Health & Safety Management Systems - Skillcast, accessed on December 15, 2025, https://www.skillcast.com/blog/how-to-select-compliance-software-integrates-with-health-safety-management-systems</li>
                     <li id="citation-33">Safetip #23: Steps to Forming a Workplace Safety Committee | Wolters Kluwer, accessed on December 15, 2025, https://www.wolterskluwer.com/en/expert-insights/safetip-23-steps-to-forming-a-workplace-safety-committee</li>
-                    <li id="citation-34">global healthy company management model | mapfre, accessed on December 15, 2025, https://www.mapfre.com/media/global-healthy-company-management-model.pdf</li>
+                    <li id="citation-34">Global healthy company management model | mapfre, accessed on December 15, 2025, https://www.mapfre.com/media/global-healthy-company-management-model.pdf</li>
+                    <li id="citation-35">HR Team - EUROPE & MEA (16 December 2025, slide 5 & 6) - Google Slides, https://docs.google.com/presentation/d/1-ul6Xcaqu6uZ8Y5i_Z71VffudXXubSMP68T3z6KhVws/edit?slide=id.g3af38cdd54b_0_1#slide=id.g3af38cdd54b_0_1</li>
+                    <li id="citation-36">Model for Early Support at Kalmar, Finland - Google Slides, https://docs.google.com/presentation/d/1Idnvv509iiJbdTPUnuW-aMBwXpRbE10z8XY-iCr9fow/edit?slide=id.g20310f8b39c_0_303#slide=id.g20310f8b39c_0_303</li>
                 </ol>
             </div>
         </section>
@@ -622,7 +655,7 @@
                 responsibilities: [
                     '• Interpreting EU Directives/Country Legislation vs. Global Standards',
                     '• Coordinating Regional Audits',
-                    '• Mentoring Site H&S Managers',
+                    '• Mentoring Site H&S Managers across European sites',
                     '• Facilitating Cross-Site Best Practice Sharing in the region',
                     '• Aggregating Regional Data for EMEA'
                 ],
